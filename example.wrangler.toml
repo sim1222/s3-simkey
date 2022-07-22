@@ -1,0 +1,14 @@
+name = "s3-simkey"
+main = "src/index.ts"
+compatibility_date = "2022-06-05"
+node_compat = true
+
+account_id = ""
+workers_dev = true
+
+route = "s3.example.tld/*"
+zone_id = ""
+
+[[r2_buckets]]
+binding = 'MY_BUCKET' # <~ valid JavaScript variable name
+bucket_name = 's3-simkey'
