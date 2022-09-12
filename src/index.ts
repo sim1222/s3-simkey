@@ -71,7 +71,7 @@ export default {
     console.log(`Object requested [${request.method}] content-type: ${object.httpMetadata.contentType ?? "application/octet-stream"}: ${key}`);
     const Result = new Response(object.body, {
       headers: {
-        'Cache-Control': 'max-age=604800',
+        'Cache-Control': 'max-age=31536000', //1Mo
         ETag: `W/${object.httpEtag}`,
         'content-type': `${object.httpMetadata.contentType ?? "application/octet-stream"}`,
         'Access-Control-Allow-Origin': '*',
