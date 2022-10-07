@@ -69,13 +69,17 @@ export default {
     // console.log(`Cache Not Found: ${key}`);
 
     console.log(`Object requested [${request.method}] content-type: ${object.httpMetadata.contentType ?? "application/octet-stream"}: ${key}`);
+    const headers = {
+      'Content-Type': object.httpMetadata.contentType ?? "application/octet-stream",
+      'Cache-Control': 'max-age=31536000', //1month
+      'ETag': `W/${object.httpEtag}`,
+      'Access-Control-Allow-Origin': '*',
+      'Content-Disposition': object.httpMetadata.contentDisposition ?? "inline",
+      'Content-Encoding': object.httpMetadata.contentEncoding ?? "identity",
+    };
+
     const Result = new Response(object.body, {
-      headers: {
-        'Cache-Control': 'max-age=31536000', //1Mo
-        ETag: `W/${object.httpEtag}`,
-        'content-type': `${object.httpMetadata.contentType ?? "application/octet-stream"}`,
-        'Access-Control-Allow-Origin': '*',
-      }
+      headers
     });
 
     //Save Cache
